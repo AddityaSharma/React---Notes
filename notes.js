@@ -277,6 +277,9 @@ Form - 1 of setState():
     (shallow merging), this process is called Batching, and this takes place to make sure that the component is not re-rendered multiple times in a single call to 
     the EventListener. Once all the modifications to the state object of the component are made, then only once the component will be re-rendered.
     
+--> The concept of batching was only there in EventListeners till React-17, and was not available in case of AJAX calls, Promise or SetTimeout/SetInterval.
+    But from React-18 onwards the batching is now an inherent concept/property for AJAX, Promises and SetTimeout/SetInterval also.
+    
 --> one key point to note here is that, if we modify the same key in the state object in the form-1 of setState(), then only the last one among them will be considered
     and any modification to the state will take place with respect to that only. consider following example for better understanding:
 
@@ -400,27 +403,3 @@ Form - 2 of setState():
         }
     }
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
