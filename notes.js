@@ -364,6 +364,41 @@ Form - 2 of setState():
             )
         }
     }
+    
+=> Asynchronous Behaviour:
+--> the setState() function works in an Asynchronous manner i.e the order of execution is not fixed.
+--> so if we want to do something like first make modifications / update the state object for a component and then perform some task using the updated state object, i.e
+    perform synchronous behaviour, then react provides us with a method, which is yet another callback function which we can pass in the setState function.
+--> this is applicable to both Form - 1 and Form - 2 of the setState function.
+    
+    Example:
+    class CartItem extends React.Component {
+        constructor(){
+            super();
+            this.state = { ... define properties }
+        }
+
+        increaseQuantity = () => {
+            this.setState((prevState) => {
+                return {
+                    qty: prevState.qty + 1
+                }
+            }, () => {
+                // callback function for synchronous behaviour.
+            });
+        }
+
+        render() {
+            const {title, price, qty} = this.state;
+
+            return (
+                <img 
+                    src="https://cdn-icons-png.flaticon.com/512/992/992651.png"
+                    onClick = {this.increaseQuantity}
+                />
+            )
+        }
+    }
 */
 
 
