@@ -65,4 +65,62 @@ Error Handling Phase Methods
   1) static getDerivedStateFromError(error) 
   2) componentDidCatch(error, info) 
   => These both Methods are used when there is an error either during rendering, in a lifecycle method, or in the constructor of any child component. 
+  
+  ==> Error Boundary:
+    > A class component that implements either one or both of the lifecycle methods getDerivedStateFromError or componentDidCatch becomes an error boundary. 
+    > The static method getDerivedStateFromError method is used to render a fallback UI after an error is thrown and the componentDidCatch method is used 
+      to log the error information. 
+*/      
+      
+// Hero.js Component:
+import React from 'react'
+
+function Hero ({ heroName }) {
+  if (heroName === 'Joker') {
+    throw new Error(' Not a hero!')
+  }
+  return <h1>{heroName}</h1>
+}
+
+export default Hero
+
+// Error Boundary Component: 
+import React, { Component } from 'react'
+
+export class ErrorBoundary extends Component {
+	constructor(props) {
+		super(props)
+
+		this.state = {
+			hasError: false
+		}
+	}
+  
+	static getDerivedStateFromError(error) {
+		return { hasError: true }
+	}
+
+  // used to console the error and its related information:
+	componentDidCatch(error, info) {
+		console.log(error)
+		console.log(info)
+	}
+
+	render() {
+    // used to render the fallback UI:
+		if (this.state.hasError) {
+			return <h1>Something went wrong.</h1>
+		}
+		return this.props.children
+	}
+}
+
+export default ErrorBoundary
+
+/*
+Summary: 
+> Error boundaries are React components that catch JavaScript error in their child component tree, log those errors, and display a fall-back UI. 
+> A class component becomes an Error Boundary by defining either or both of getDerivedStateFromError and componentDidCatch lifecycle methods. 
+> The placement of the Error Boundary also matters as it controls if the entire app should have the fall-back UI or just the component causing the problem. 
+> Provide a way to gracefully handle error in application code. 
 */
