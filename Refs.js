@@ -30,7 +30,7 @@ import React, { Component } from 'react'
 export class RefsDemo extends Component {
 	constructor(props) {
 		super(props)
-		this.cbRef = null // step-1: create the reference for a particular element.
+		this.cbRef = null // step-1: create the reference for a particular element
 		this.setCbRef = element => { // step-2: create a method to set the reference property.
 			this.cbRef = element
 		}
